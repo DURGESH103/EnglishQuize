@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle, XCircle, ArrowRight, Home } from 'lucide-react';
+import { CheckCircle, XCircle, ArrowRight, Home, Volume2, HelpCircle } from 'lucide-react';
 import ProgressBar from '../components/ProgressBar';
+import WordMatchGame from '../components/WordMatchGame';
+import data from '../data/data.json';
 
 const Play = () => {
   const { gameType } = useParams();
@@ -14,49 +16,41 @@ const Play = () => {
   const [isCorrect, setIsCorrect] = useState(null);
   const [gameCompleted, setGameCompleted] = useState(false);
 
-  // Sample questions - in a real app, these would come from an API or database
+  // Load questions from data.json
   const questions = {
-    vocabulary: [
-      {
-        question: "What does 'ubiquitous' mean?",
-        options: ["Rare", "Everywhere", "Beautiful", "Fast"],
-        correct: 1,
-        explanation: "Ubiquitous means present or found everywhere."
-      },
-      {
-        question: "Choose the synonym for 'ephemeral':",
-        options: ["Permanent", "Short-lived", "Bright", "Heavy"],
-        correct: 1,
-        explanation: "Ephemeral means lasting for a very short time."
+    vocabulary: data.vocabulary.map(item => ({
+      question: `What does '${item.word}' mean?`,
+      options: item.options,
+      correct: item.correct,
+      explanation: item.definition
+    })),
+    spelling: data.spelling.map(item => ({
+      question: `Spell the word: '${item.word}'`,
+      correct: item.word,
+      phonetic: item.phonetic,
+      hint: `Difficulty: ${item.difficulty}`
+    })),
+    grammar: data.grammar.map(item => ({
+      question: item.question,
+      options: item.options,
+      correct: item.correct,
+      explanation: item.explanation
+    })),
+    match: data.wordMatch.reduce((acc, item, index) => {
+      const existingGroup = acc.find(group => group.category === item.category);
+      if (existingGroup) {
+        existingGroup.words.push(item.word);
+        existingGroup.meanings.push(item.meaning);
+      } else {
+        acc.push({
+          category: item.category,
+          words: [item.word],
+          meanings: [item.meaning],
+          correct: []
+        });
       }
-    ],
-    spelling: [
-      {
-        question: "Spell the word: 'necessary'",
-        correct: "necessary",
-        hint: "Something you must have"
-      },
-      {
-        question: "Spell the word: 'accommodation'",
-        correct: "accommodation",
-        hint: "A place to stay"
-      }
-    ],
-    grammar: [
-      {
-        question: "Fill in the blank: She ___ to the store yesterday.",
-        options: ["go", "went", "going", "goes"],
-        correct: 1,
-        explanation: "Past tense is needed here."
-      }
-    ],
-    match: [
-      {
-        words: ["Apple", "Book", "Car"],
-        meanings: ["A fruit", "Something to read", "A vehicle"],
-        correct: [0, 1, 2]
-      }
-    ]
+      return acc;
+    }, [])
   };
 
   const currentQ = questions[gameType]?.[currentQuestion];
@@ -146,10 +140,10 @@ const Play = () => {
   }
 
   return (
-    <div className="max-w-2xl mx-auto">
-      <div className="mb-8">
+    <div className="max-w-2xl mx-auto px-4">
+      <div className="mb-6 md:mb-8">
         <ProgressBar progress={progress} />
-        <div className="flex justify-between items-center mt-4">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-4 gap-2">
           <span className="text-sm text-gray-600 dark:text-gray-300">
             Question {currentQuestion + 1} of {questions[gameType].length}
           </span>
@@ -166,7 +160,7 @@ const Play = () => {
         exit={{ opacity: 0, x: -50 }}
         className="card"
       >
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4 md:mb-6">
           {currentQ.question}
         </h2>
 
@@ -179,7 +173,7 @@ const Play = () => {
                 whileTap={{ scale: 0.98 }}
                 onClick={() => handleAnswer(index)}
                 disabled={selectedAnswer !== null}
-                className={`w-full p-4 text-left rounded-lg border-2 transition-all ${
+                className={`w-full p-3 md:p-4 text-left rounded-lg border-2 transition-all text-sm md:text-base ${
                   selectedAnswer === null
                     ? 'border-gray-200 dark:border-gray-600 hover:border-primary-500'
                     : selectedAnswer === index
@@ -201,9 +195,9 @@ const Play = () => {
                         exit={{ scale: 0 }}
                       >
                         {isCorrect ? (
-                          <CheckCircle className="h-5 w-5 text-green-500" />
+                          <CheckCircle className="h-4 w-4 md:h-5 md:w-5 text-green-500" />
                         ) : (
-                          <XCircle className="h-5 w-5 text-red-500" />
+                          <XCircle className="h-4 w-4 md:h-5 md:w-5 text-red-500" />
                         )}
                       </motion.div>
                     )}
@@ -218,17 +212,31 @@ const Play = () => {
             onSubmit={handleSpellingSubmit}
             isCorrect={isCorrect}
           />
+        ) : gameType === 'match' ? (
+          <WordMatchGame
+            question={currentQ}
+            onComplete={(correct) => {
+              if (correct) setScore(score + 12);
+              setTimeout(() => {
+                if (currentQuestion < questions[gameType].length - 1) {
+                  setCurrentQuestion(currentQuestion + 1);
+                } else {
+                  setGameCompleted(true);
+                }
+              }, 2000);
+            }}
+          />
         ) : (
-          <div>Match game coming soon!</div>
+          <div>Game type not supported</div>
         )}
 
         {selectedAnswer !== null && currentQ.explanation && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-6 p-4 bg-blue-50 dark:bg-blue-900 rounded-lg"
+            className="mt-4 md:mt-6 p-3 md:p-4 bg-blue-50 dark:bg-blue-900 rounded-lg"
           >
-            <p className="text-blue-800 dark:text-blue-200">{currentQ.explanation}</p>
+            <p className="text-sm md:text-base text-blue-800 dark:text-blue-200">{currentQ.explanation}</p>
           </motion.div>
         )}
       </motion.div>
@@ -256,7 +264,7 @@ const SpellingGame = ({ question, onSubmit, isCorrect }) => {
   return (
     <div className="space-y-4">
       <p className="text-gray-600 dark:text-gray-300">{question.hint}</p>
-      <div className="flex space-x-4">
+      <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
         <input
           type="text"
           value={input}
@@ -269,13 +277,13 @@ const SpellingGame = ({ question, onSubmit, isCorrect }) => {
         <button
           onClick={handleSubmit}
           disabled={!input.trim() || submitted}
-          className="btn btn-primary"
+          className="btn btn-primary w-full sm:w-auto"
         >
           <ArrowRight className="h-4 w-4" />
         </button>
       </div>
       {submitted && (
-        <div className={`p-4 rounded-lg ${isCorrect ? 'bg-green-50 dark:bg-green-900 text-green-800 dark:text-green-200' : 'bg-red-50 dark:bg-red-900 text-red-800 dark:text-red-200'}`}>
+        <div className={`p-3 md:p-4 rounded-lg text-sm md:text-base ${isCorrect ? 'bg-green-50 dark:bg-green-900 text-green-800 dark:text-green-200' : 'bg-red-50 dark:bg-red-900 text-red-800 dark:text-red-200'}`}>
           {isCorrect ? 'Correct!' : `Incorrect. The correct spelling is: ${question.correct}`}
         </div>
       )}

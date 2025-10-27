@@ -43,17 +43,17 @@ const Learn = () => {
   ];
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 md:space-y-8 px-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         className="text-center"
       >
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
           Choose Your Learning Adventure
         </h1>
-        <p className="text-xl text-gray-600 dark:text-gray-300">
+        <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300">
           Select a game to start improving your English skills
         </p>
       </motion.div>
@@ -62,7 +62,7 @@ const Learn = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
       >
         {games.map((game, index) => (
           <GameCard key={game.type} game={game} />

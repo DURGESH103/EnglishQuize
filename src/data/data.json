@@ -1,0 +1,174 @@
+{
+  "vocabulary": [
+    {
+      "id": 1,
+      "word": "serendipity",
+      "definition": "The occurrence of events by chance in a happy or beneficial way",
+      "options": ["Misfortune", "Serendipity", "Chaos", "Routine"],
+      "correct": 1,
+      "difficulty": "hard"
+    },
+    {
+      "id": 2,
+      "word": "ephemeral",
+      "definition": "Lasting for a very short time",
+      "options": ["Permanent", "Ephemeral", "Eternal", "Enduring"],
+      "correct": 1,
+      "difficulty": "medium"
+    },
+    {
+      "id": 3,
+      "word": "ubiquitous",
+      "definition": "Present, appearing, or found everywhere",
+      "options": ["Rare", "Ubiquitous", "Hidden", "Scarce"],
+      "correct": 1,
+      "difficulty": "medium"
+    },
+    {
+      "id": 4,
+      "word": "gregarious",
+      "definition": "Fond of company; sociable",
+      "options": ["Shy", "Gregarious", "Lonely", "Introverted"],
+      "correct": 1,
+      "difficulty": "easy"
+    },
+    {
+      "id": 5,
+      "word": "resilient",
+      "definition": "Able to recover quickly from difficulties",
+      "options": ["Fragile", "Resilient", "Weak", "Brittle"],
+      "correct": 1,
+      "difficulty": "easy"
+    }
+  ],
+  "grammar": [
+    {
+      "id": 1,
+      "question": "She _____ to the store yesterday.",
+      "options": ["go", "goes", "went", "going"],
+      "correct": 2,
+      "type": "fill_blank",
+      "explanation": "Use past tense for actions completed in the past."
+    },
+    {
+      "id": 2,
+      "question": "If I _____ rich, I would travel the world.",
+      "options": ["am", "were", "was", "be"],
+      "correct": 1,
+      "type": "fill_blank",
+      "explanation": "Use 'were' in conditional sentences for all subjects."
+    },
+    {
+      "id": 3,
+      "question": "The book that you gave me is very interesting. (Find the error)",
+      "options": ["No error", "that you gave", "is very", "interesting"],
+      "correct": 0,
+      "type": "find_error",
+      "explanation": "The sentence is grammatically correct."
+    },
+    {
+      "id": 4,
+      "question": "He don't like apples. (Find the error)",
+      "options": ["He", "don't", "like", "apples"],
+      "correct": 1,
+      "type": "find_error",
+      "explanation": "Use 'doesn't' with third person singular subjects."
+    },
+    {
+      "id": 5,
+      "question": "They _____ playing football when it started raining.",
+      "options": ["was", "were", "are", "is"],
+      "correct": 1,
+      "type": "fill_blank",
+      "explanation": "Use 'were' with plural subjects in past continuous."
+    }
+  ],
+  "spelling": [
+    {
+      "id": 1,
+      "word": "necessary",
+      "phonetic": "ˈnesəˌserē",
+      "difficulty": "medium"
+    },
+    {
+      "id": 2,
+      "word": "accommodation",
+      "phonetic": "əˌkäməˈdāSHən",
+      "difficulty": "hard"
+    },
+    {
+      "id": 3,
+      "word": "embarrass",
+      "phonetic": "emˈbarəs",
+      "difficulty": "medium"
+    },
+    {
+      "id": 4,
+      "word": "restaurant",
+      "phonetic": "ˈresˌtərənt",
+      "difficulty": "easy"
+    },
+    {
+      "id": 5,
+      "word": "beautiful",
+      "phonetic": "ˈbyo͞odəfəl",
+      "difficulty": "easy"
+    }
+  ],
+  "wordMatch": [
+    {
+      "id": 1,
+      "word": "abundant",
+      "meaning": "existing in large quantities",
+      "category": "quantity"
+    },
+    {
+      "id": 2,
+      "word": "scarcity",
+      "meaning": "the state of being scarce or in short supply",
+      "category": "quantity"
+    },
+    {
+      "id": 3,
+      "word": "diligent",
+      "meaning": "having or showing care and conscientiousness in one's work",
+      "category": "personality"
+    },
+    {
+      "id": 4,
+      "word": "negligent",
+      "meaning": "failing to take proper care in doing something",
+      "category": "personality"
+    },
+    {
+      "id": 5,
+      "word": "vibrant",
+      "meaning": "full of energy and life",
+      "category": "appearance"
+    },
+    {
+      "id": 6,
+      "word": "dull",
+      "meaning": "lacking interest or excitement",
+      "category": "appearance"
+    },
+    {
+      "id": 7,
+      "word": "meticulous",
+      "meaning": "showing great attention to detail",
+      "category": "personality"
+    },
+    {
+      "id": 8,
+      "word": "sloppy",
+      "meaning": "careless and unsystematic",
+      "category": "personality"
+    }
+  ],
+  "dailyChallenge": {
+    "word": "perseverance",
+    "definition": "steadfastness in doing something despite difficulty or delay in achieving success",
+    "example": "Her perseverance in learning English paid off when she got her dream job.",
+    "date": "2024-01-15"
+  }
+}

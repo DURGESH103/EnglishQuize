@@ -18,17 +18,17 @@ const GameCard = ({ game }) => {
             <Play className="h-8 w-8 text-white" />
           </div>
         </div>
-        <div className="p-4">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+        <div className="p-3 md:p-4">
+          <h3 className="text-base md:text-lg font-semibold text-gray-900 dark:text-white mb-2">
             {game.title}
           </h3>
-          <p className="text-gray-600 dark:text-gray-300 text-sm mb-3">
+          <p className="text-gray-600 dark:text-gray-300 text-xs md:text-sm mb-3">
             {game.description}
           </p>
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-1">
-              <Star className="h-4 w-4 text-yellow-400 fill-current" />
-              <span className="text-sm text-gray-600 dark:text-gray-300">
+              <Star className="h-3 w-3 md:h-4 md:w-4 text-yellow-400 fill-current" />
+              <span className="text-xs md:text-sm text-gray-600 dark:text-gray-300">
                 {game.difficulty}
               </span>
             </div>

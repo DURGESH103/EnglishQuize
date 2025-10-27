@@ -29,29 +29,29 @@ const Profile = () => {
   const progressPercent = (user.xp / user.xpToNext) * 100;
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8">
+    <div className="max-w-4xl mx-auto space-y-6 md:space-y-8 px-4">
       {/* Profile Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="card text-center"
       >
-        <div className="w-24 h-24 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-full mx-auto mb-4 flex items-center justify-center text-3xl">
+        <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl sm:text-3xl">
           👤
         </div>
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-2">
           {user.name}
         </h1>
-        <div className="flex items-center justify-center space-x-4 mb-4">
-          <span className="text-lg text-gray-600 dark:text-gray-300">
+        <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-4 mb-4">
+          <span className="text-base sm:text-lg text-gray-600 dark:text-gray-300">
             Level {user.level}
           </span>
-          <span className="text-lg text-primary-500 font-semibold">
+          <span className="text-base sm:text-lg text-primary-500 font-semibold">
             {user.xp} XP
           </span>
         </div>
         <div className="space-y-2">
-          <div className="flex justify-between text-sm text-gray-600 dark:text-gray-300">
+          <div className="flex justify-between text-xs sm:text-sm text-gray-600 dark:text-gray-300">
             <span>Progress to Level {user.level + 1}</span>
             <span>{user.xp}/{user.xpToNext} XP</span>
           </div>
@@ -64,13 +64,13 @@ const Profile = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="grid grid-cols-2 md:grid-cols-4 gap-4"
+        className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4"
       >
         {stats.map((stat, index) => (
           <div key={index} className="card text-center">
-            <stat.icon className="h-8 w-8 text-primary-500 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-gray-900 dark:text-white">{stat.value}</div>
-            <div className="text-sm text-gray-600 dark:text-gray-300">{stat.label}</div>
+            <stat.icon className="h-6 w-6 sm:h-8 sm:w-8 text-primary-500 mx-auto mb-2" />
+            <div className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-white">{stat.value}</div>
+            <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">{stat.label}</div>
           </div>
         ))}
       </motion.div>
@@ -82,23 +82,23 @@ const Profile = () => {
         transition={{ delay: 0.4 }}
         className="card"
       >
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
-          <Award className="h-6 w-6 mr-2" />
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4 md:mb-6 flex items-center">
+          <Award className="h-5 w-5 sm:h-6 sm:w-6 mr-2" />
           Achievements
         </h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
           {user.badges.map((badge, index) => (
             <motion.div
               key={index}
               whileHover={{ scale: 1.05 }}
-              className={`p-4 rounded-lg border-2 text-center transition-all ${
+              className={`p-3 md:p-4 rounded-lg border-2 text-center transition-all ${
                 badge.earned
                   ? 'border-yellow-400 bg-yellow-50 dark:bg-yellow-900'
                   : 'border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-800'
               }`}
             >
-              <div className="text-3xl mb-2">{badge.icon}</div>
-              <div className={`text-sm font-semibold ${
+              <div className="text-2xl sm:text-3xl mb-2">{badge.icon}</div>
+              <div className={`text-xs sm:text-sm font-semibold ${
                 badge.earned
                   ? 'text-yellow-800 dark:text-yellow-200'
                   : 'text-gray-500 dark:text-gray-400'
